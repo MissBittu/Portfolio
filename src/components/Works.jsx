@@ -1,100 +1,98 @@
 import React from "react";
-import {Tilt} from "react-tilt";
-import { motion } from "framer-motion";
 
-import { styles } from "../styles";
-import { github } from "../assets";
-import { SectionWrapper } from "../hoc";
-import { projects } from "../constants";
-import { fadeIn, textVariant } from "../utils/motion";
-
-const ProjectCard = ({
-  index,
-  name,
-  description,
-  tags,
-  image,
-  source_code_link,
-}) => {
-  return (
-    <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
-      <Tilt
-        options={{
-          max: 45,
-          scale: 1,
-          speed: 450,
-        }}
-        className='bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full'
-      >
-        <div className='relative w-full h-[230px]'>
-          <img
-            src={image}
-            alt='project_image'
-            className='w-full h-full object-cover rounded-2xl'
-          />
-
-          <div className='absolute inset-0 flex justify-end m-3 card-img_hover'>
-            <div
-              onClick={() => window.open(source_code_link, "_blank")}
-              className='black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer'
-            >
-              <img
-                src={github}
-                alt='source code'
-                className='w-1/2 h-1/2 object-contain'
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className='mt-5'>
-          <h3 className='text-white font-bold text-[24px]'>{name}</h3>
-          <p className='mt-2 text-secondary text-[14px]'>{description}</p>
-        </div>
-
-        <div className='mt-4 flex flex-wrap gap-2'>
-          {tags.map((tag) => (
-            <p
-              key={`${name}-${tag.name}`}
-              className={`text-[14px] ${tag.color}`}
-            >
-              #{tag.name}
-            </p>
-          ))}
-        </div>
-      </Tilt>
-    </motion.div>
-  );
-};
+const projects = [
+  {
+    name: "Advance E-Commerce Predictor",
+    desc: "Developed a multimodal deep-learning model that predicts product prices by fusing text and image features. Implemented a custom SMAPE loss, 5-fold cross-validation ensemble, and Test-Time Augmentation for robust generalization.",
+    link: "https://github.com/MissBittu/Advance_Ecommerce_Predictor",
+    tags: [
+      "Python",
+      "PyTorch",
+      "ResNet50",
+      "MiniLM",
+      "Sentence-Transformers",
+      "EDA",
+      "Feature Engineering",
+      "Cross-Validation",
+      "TTA",
+      "SMAPE Loss",
+    ],
+  },
+  {
+    name: "Customer Retention Predictor (87%)",
+    desc: "Designed a churn-prediction pipeline analyzing customer behavior through feature engineering and EDA. Achieved 87% accuracy using Logistic Regression with scikit-learn.",
+    link: "https://github.com/MissBittu",
+    tags: ["Python", "Scikit-learn", "Pandas", "Logistic Regression", "EDA"],
+  },
+  {
+    name: "Python Learning Web Platform",
+    desc: "Built an interactive learning portal that helps beginners master Python through structured lessons and quizzes. Front-end in React + Tailwind CSS, deployed via Vercel.",
+    link: "https://github.com/MissBittu",
+    tags: ["React", "Tailwind", "Vercel", "Frontend", "Education Tech"],
+  },
+  {
+    name: "Personal AI Assistant (In Progress)",
+    desc: "Currently building an AI-powered personal assistant integrating LLMs, LangChain, and contextual memory for daily-task automation and intelligent reminders.",
+    link: "https://github.com/MissBittu",
+    tags: ["LLMs", "LangChain", "AI Agents", "GenAI", "Python"],
+  },
+  {
+    name: "Modular Drone Design & Development",
+    desc: "Engineered a drone telemetry and analytics pipeline using Python and Pandas to process geospatial flight data. Applied CFD/FEA simulations in ANSYS for airframe validation and deployed scalable analytics via Docker and cloud platforms.",
+    link: "https://github.com/MissBittu", // update when repo is public
+    tags: [
+      "SolidWorks",
+      "ANSYS",
+      "Python",
+      "Pandas",
+      "Docker",
+      "Cloud",
+      "Data Analytics",
+      "Simulation",
+    ],
+  },
+];
 
 const Works = () => {
   return (
-    <>
-      <motion.div variants={textVariant()}>
-        <p className={`${styles.sectionSubText} `}>My work</p>
-        <h2 className={`${styles.sectionHeadText}`}>Projects.</h2>
-      </motion.div>
+    <section id="projects" className="px-6 py-20 max-w-6xl mx-auto">
+      <p className="uppercase tracking-widest text-sm text-gray-400">My Work</p>
+      <h2 className="text-4xl md:text-5xl font-extrabold mt-2">Projects</h2>
 
-      <div className='w-full flex'>
-        <motion.p
-          variants={fadeIn("", "", 0.1, 1)}
-          className='mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]'
-        >
-          Following projects showcases my skills and experience through
-          real-world examples of my work. Each project is briefly described with
-          links to code repositories and live demos in it. It reflects my
-          ability to solve complex problems, work with different technologies,
-          and manage projects effectively.
-        </motion.p>
+      {/* 🌌 Current Focus Banner */}
+      <div className="mt-4 bg-white/5 p-4 rounded-xl border border-indigo-500/20">
+        <p className="text-indigo-300 text-sm">
+          🧠 <strong>Currently Exploring:</strong> LangChain, Docker, AWS, and Agentic AI Systems
+        </p>
       </div>
 
-      <div className='mt-20 flex flex-wrap gap-7'>
-        {projects.map((project, index) => (
-          <ProjectCard key={`project-${index}`} index={index} {...project} />
+      {/* Projects Grid */}
+      <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projects.map((p) => (
+          <a
+            key={p.name}
+            href={p.link}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/[.08] transition block"
+          >
+            <h3 className="font-semibold text-lg text-indigo-300">{p.name}</h3>
+            <p className="text-sm text-gray-300 mt-2">{p.desc}</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {p.tags.map((t) => (
+                <span
+                  key={t}
+                  className="text-xs px-2 py-1 rounded bg-white/10 text-indigo-400"
+                >
+                  #{t}
+                </span>
+              ))}
+            </div>
+          </a>
         ))}
       </div>
-    </>
+    </section>
   );
 };
 
-export default SectionWrapper(Works, "");
+export default Works;

@@ -1,100 +1,75 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
-import { styles } from "../styles";
-import { navLinks } from "../constants";
+import { Link as ScrollLink } from "react-scroll";
 import { logo, menu, close } from "../assets";
 
 const Navbar = () => {
-  const [active, setActive] = useState("");
-  const [toggle, setToggle] = useState(false);
+  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      if (scrollTop > 100) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const Item = ({ to, children }) => (
+    <ScrollLink
+      to={to}
+      smooth={true}
+      duration={600}
+      offset={-70}
+      className="cursor-pointer hover:text-white/90 transition"
+      onClick={() => setOpen(false)}
+    >
+      {children}
+    </ScrollLink>
+  );
 
   return (
     <nav
-      className={`${
-        styles.paddingX
-      } w-full flex items-center py-5 fixed top-0 z-20 ${
-        scrolled ? "bg-primary" : "bg-transparent"
+      className={`fixed top-0 z-50 w-full transition backdrop-blur-md ${
+        scrolled ? "bg-black/40 border-b border-white/10" : "bg-transparent"
       }`}
     >
-      <div className='w-full flex justify-between items-center max-w-7xl mx-auto'>
-        <Link
-          to='/'
-          className='flex items-center gap-2'
-          onClick={() => {
-            setActive("");
-            window.scrollTo(0, 0);
-          }}
-        >
-          <img src={logo} alt='logo' className='w-12 h-12 object-contain' />
-          <p className='text-white text-[30px] font-bold cursor-pointer flex '>
-            Sakshi &nbsp;
-            <span className='sm:block hidden'>Meena</span>
-          </p>
-        </Link>
-        
-        <ul className='list-none hidden sm:flex flex-row gap-10'>
-          {navLinks.map((nav) => (
-            <li
-              key={nav.id}
-              className={`${
-                active === nav.title ? "text-white" : "text-secondary"
-              } hover:text-white text-[18px] font-medium cursor-pointer`}
-              onClick={() => setActive(nav.title)}
-            >
-              <a href={`#${nav.id}`}>{nav.title}</a>
-            </li>
-          ))}
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          {logo ? (
+            <img src={logo} alt="logo" className="w-9 h-9 object-contain" />
+          ) : null}
+          <span className="font-semibold tracking-wide">
+            MISS <span className="text-indigo-400">SAKSHI</span>
+          </span>
+        </div>
+
+        <ul className="hidden md:flex items-center gap-10 text-gray-300">
+          <li><Item to="about">About</Item></li>
+          <li><Item to="work">Experience</Item></li>
+          <li><Item to="projects">Projects</Item></li>
+          <li><Item to="contact">Contact</Item></li>
         </ul>
 
-        <div className='sm:hidden flex flex-1 justify-end items-center'>
+        <button className="md:hidden" onClick={() => setOpen((v) => !v)}>
           <img
-            src={toggle ? close : menu}
-            alt='menu'
-            className='w-[28px] h-[28px] object-contain'
-            onClick={() => setToggle(!toggle)}
+            src={open ? close : menu}
+            alt="menu"
+            className="w-7 h-7 invert"
           />
+        </button>
+      </div>
 
-          <div
-            className={`${
-              !toggle ? "hidden" : "flex"
-            } p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
-          >
-            <ul className='list-none flex justify-end items-start flex-1 flex-col gap-4'>
-              {navLinks.map((nav) => (
-                <li
-                  key={nav.id}
-                  className={`font-poppins font-medium cursor-pointer text-[16px] ${
-                    active === nav.title ? "text-white" : "text-secondary"
-                  }`}
-                  onClick={() => {
-                    setToggle(!toggle);
-                    setActive(nav.title);
-                  }}
-                >
-                  <a href={`#${nav.id}`}>{nav.title}</a>
-                </li>
-              ))}
+      {/* mobile */}
+      {open && (
+        <div className="md:hidden px-6 pb-6">
+          <div className="rounded-2xl bg-black/60 border border-white/10 p-4">
+            <ul className="flex flex-col gap-4 text-gray-300">
+              <li><Item to="about">About</Item></li>
+              <li><Item to="work">Experience</Item></li>
+              <li><Item to="projects">Projects</Item></li>
+              <li><Item to="contact">Contact</Item></li>
             </ul>
           </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 };

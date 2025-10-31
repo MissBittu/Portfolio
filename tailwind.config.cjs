@@ -1,18 +1,21 @@
-/**** tailwind.config.cjs ****/
+/** @type {import('tailwindcss').Config} */
 module.exports = {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class",
-  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
-      colors: {
-        brand: { DEFAULT: "#6C5CE7", dark: "#4D3FD1", light: "#EEF0FF" },
-        ink: { 900: "#0B1020", 700: "#1D2438", 500: "#3C4663", 300: "#7C89A8" },
-      },
       fontFamily: {
-        display: ["Inter", "ui-sans-serif", "system-ui"],
-        body: ["Inter", "ui-sans-serif", "system-ui"],
+        body: ["Inter", "Poppins", "sans-serif"],
       },
-      borderRadius: { "2xl": "1rem" },
+      colors: {
+        primary: "#0a0a0a",
+        secondary: "#a3a3a3",
+        accent: "#6366f1",
+      },
+      backgroundImage: {
+        "hero-gradient":
+          "linear-gradient(135deg, rgba(99,102,241,0.1), rgba(147,51,234,0.05))",
+      },
     },
   },
   plugins: [],

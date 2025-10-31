@@ -1,85 +1,44 @@
 import React from "react";
-import {
-  VerticalTimeline,
-  VerticalTimelineElement,
-} from "react-vertical-timeline-component";
-import { motion } from "framer-motion";
 
-import "react-vertical-timeline-component/style.min.css";
-
-import { styles } from "../styles";
-import { experiences } from "../constants";
-import { SectionWrapper } from "../hoc";
-import { textVariant } from "../utils/motion";
-
-const ExperienceCard = ({ experience }) => {
-  return (
-    <VerticalTimelineElement
-      contentStyle={{
-        background: "#1d1836",
-        color: "#fff",
-      }}
-      contentArrowStyle={{ borderRight: "7px solid  #232631" }}
-      date={experience.date}
-      iconStyle={{ background: experience.iconBg }}
-      icon={
-        <div className='flex justify-center items-center w-full h-full'>
-          <img
-            src={experience.icon}
-            alt={experience.company_name}
-            className='w-[60%] h-[60%] object-contain'
-          />
-        </div>
-      }
-    >
-      <div>
-        <h3 className='text-white text-[24px] font-bold'>{experience.title}</h3>
-        <p
-          className='text-secondary text-[16px] font-semibold'
-          style={{ margin: 0 }}
-        >
-          {experience.company_name}
-        </p>
-      </div>
-
-      <ul className='mt-5 list-disc ml-5 space-y-2'>
-        {experience.points.map((point, index) => (
-          <li
-            key={`experience-point-${index}`}
-            className='text-white-100 text-[14px] pl-1 tracking-wider'
-          >
-            {point}
-          </li>
-        ))}
-      </ul>
-    </VerticalTimelineElement>
-  );
-};
+const items = [
+  {
+    title: "Research Intern – UAV / Drone Systems",
+    org: "IIIT Bhagalpur (Robotics & Automation)",
+    date: "Jun 2024 – Sep 2024",
+    bullets: [
+      "Integrated ML analysis into UAV control and telemetry workflows.",
+      "Wrote Python data-processing scripts; visualized flight datasets.",
+      "Collaborated on applied robotics + AI research."
+    ],
+  },
+  
+];
 
 const Experience = () => {
   return (
-    <>
-      <motion.div variants={textVariant()}>
-        <p className={`${styles.sectionSubText} text-center`}>
-          What I have done so far
-        </p>
-        <h2 className={`${styles.sectionHeadText} text-center`}>
-          Work Experience.
-        </h2>
-      </motion.div>
+    <section id="work" className="px-6 py-16 md:py-24 max-w-6xl mx-auto">
+      <p className="uppercase tracking-widest text-sm text-gray-400">What I’ve done</p>
+      <h2 className="text-3xl md:text-4xl font-extrabold mt-1">Experience</h2>
 
-      <div className='mt-20 flex flex-col'>
-        <VerticalTimeline>
-          {experiences.map((experience, index) => (
-            <ExperienceCard
-              key={`experience-${index}`}
-              experience={experience}
-            />
-          ))}
-        </VerticalTimeline>
+      <div className="mt-10 space-y-6">
+        {items.map((exp) => (
+          <div
+            key={exp.title}
+            className="rounded-2xl border border-white/10 bg-white/5 p-6"
+          >
+            <div className="flex items-center justify-between gap-4">
+              <h3 className="font-semibold text-lg">{exp.title}</h3>
+              <span className="text-sm text-gray-400">{exp.date}</span>
+            </div>
+            <p className="text-indigo-300 text-sm mt-1">{exp.org}</p>
+            <ul className="mt-3 list-disc ml-5 space-y-2 text-gray-200 text-sm">
+              {exp.bullets.map((b, i) => <li key={i}>{b}</li>)}
+            </ul>
+          </div>
+        ))}
       </div>
-    </>
+    </section>
   );
 };
 
-export default SectionWrapper(Experience, "work");
+export default Experience;
