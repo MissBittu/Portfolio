@@ -1,10 +1,6 @@
 <h1 align="center">🌌 Miss Sakshi — AI Engineer | ML Developer | Creator</h1>
 
 <p align="center">
-  <img src="public/og-image.png" alt="Portfolio Preview" width="800"/>
-</p>
-
-<p align="center">
   <b>Exploring the intersection of Machine Learning, Creativity, and Intelligent Product Design.</b><br/>
   Transforming data into meaningful experiences — one intelligent system at a time.
 </p>
@@ -90,3 +86,4 @@ npm install
 
 # Start the development server
 npm run dev
+
