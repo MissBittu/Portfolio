@@ -1,4 +1,4 @@
-<h1 align="center">🌌 Miss Sakshi — AI Engineer | ML Developer | Creator</h1>
+<h1 align="center">🌌 Miss Sakshi — Software Developer | AI/ML Developer </h1>
 
 <p align="center">
   <b>Exploring the intersection of Machine Learning, Creativity, and Intelligent Product Design.</b><br/>
@@ -86,4 +86,5 @@ npm install
 
 # Start the development server
 npm run dev
+
 
