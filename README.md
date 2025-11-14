@@ -22,7 +22,7 @@ this portfolio is my home on the internet to showcase my projects, skills, and j
 ---
 
 ## 🚀 Live Website
-🔗 [miss-sakshi.vercel.app](https://miss-sakshi.vercel.app)
+🔗 [miss-sakshi.vercel.app](https://portfolio-missbittus-projects.vercel.app/)
 
 ---
 
@@ -86,5 +86,6 @@ npm install
 
 # Start the development server
 npm run dev
+
 
 
